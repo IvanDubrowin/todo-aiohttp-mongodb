@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block main %}
+<div id="task-row" class="row">
+    {% for task in tasks %}
+    <div id="task-card" class="col s3">
+      <a href="{{ url('detail', id=task._id|string) }}">
+        <div class="paper card-paper">
+          <h5>Задача: {{ task.title }}</h5>
+          <p>{{ task.text }}</p>
+          <p>Нужно выполнить до: {{ task.deadline }}</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

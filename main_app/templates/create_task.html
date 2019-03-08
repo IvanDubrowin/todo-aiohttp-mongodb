@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+{% block main %}
+<div class="container login-container">
+  <div class="row">
+    <div class="col s4">
+    </div>
+    <div class="col s4 content center">
+      <div class="paper">
+        <form autocomplete="on" method="post">
+          <div class="input-field">
+              <input type="text" class="validate" id="title" required>
+              <label for="title">Название задачи</label>
+          </div>
+          <div class="input-field">
+              <textarea class="materialize-textarea" id="text" required></textarea>
+              <label for="text">Описание задачи</label>
+          </div>
+          <div class="input-field">
+              <input type="text" class="datepicker" id="deadline-day">
+              <label for="deadline-day">День выполнения</label>
+          </div>
+          <div class="input-field">
+              <input type="text" class="timepicker" id="deadline-time">
+              <label for="deadline-time">Время выполнения</label>
+          </div>
+          <div id="error" style="color: red;"></div>
+          <p>
+            <input class="btn orange accent-1" id="submit" title="Создать задачу" type="button" value="Создать задачу">
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="col s4">
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      container: 'body'
+      });
+  });
+  $(document).ready(function(){
+    $('.timepicker').timepicker({
+      container: 'body'
+      });
+  });
+  $(document).ready(function(){
+
+    function showError(error){
+        $('#error').text(error);
+    }
+
+    $('#submit').click(function(){
+        var title = $('#title').val(),
+            text = $('#text').val(),
+            day = $('#deadline-day').val(),
+            time = $('#deadline-time').val();
+        if(title && text && day && time){
+          var task = {'title': title, 'text': text, 'day': day, 'time': time}
+          $.post('create_task', task, function(data){
+              if (data.error){
+                  showError(data.error.error);
+              }else{
+                  window.location.href = '/';
+              }
+            });
+        }else{
+           showError('Пожалуйста заполните все поля');
+        }
+    });
+});
+</script>
+{% endblock %}

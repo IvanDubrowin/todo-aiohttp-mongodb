@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <ul id="slide-out" class="sidenav">
+    <div class="row">
+      <div class="background">
+        <img src="{{ static('images/todo.png') }}">
+      </div>
+    </div>
+    <div class="row">
+      <li><a href="{{ url('create_task') }}">Создать задачу</a></li>
+      <li><a href="{{ url('active')}}">Активные задачи</a></li>
+      <li><a href="{{ url('success')}}">Выполненные задачи</a></li>
+      <li><a href="{{ url('not_done')}}">Невыполненные задачи</a></li>
+      <li><a href="{{ url('profile')}}">Мой профиль</a></li>
+      <li><a href="{{ url('logout')}}">Выйти</a></li>
+    </div>
+    <div class="row">
+      <div class="page-footer">
+        <a href="https://github.com/IvanDubrowin"><img src="{{ static('images/github.png') }}" style="width:50px; height:50px;"></a>
+      </div>
+    </div>
+  </ul>
+  <a id="main-menu-btn" href="#" data-target="slide-out" class="btn-floating btn-large waves-effect waves-light orange accent-1 sidenav-trigger"><i class="material-icons">menu</i></a>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+    });
+    $('#slide-out li a').each(function() {
+      var page = location.pathname
+      if(page == $(this).attr('href')) {
+        $(this).parents('li').addClass('active');
+      }
+    });
+  </script>
+</div>
+  <div class="row center-align">
+    <div class="col s1"></div>
+    <div class="col s10">
+      {% block main%}
+      {% endblock %}
+    </div>
+    <div class="col s1"></div>
+  </div>
+{% endblock %}

@@ -1,0 +1,110 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+  flex: 1 0 auto;
+}
+
+.page-footer {
+  background: #ffe082;
+  text-align: center;
+  color: black;
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height: 140px;
+}
+
+
+#main-menu-btn {
+  margin: 15px 15px 15px 15px;
+}
+#slide-out {
+  background: #ffecb3;
+}
+
+.background {
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.background img {
+  height: 100%;
+  max-width: 100%;
+  position: sticky;
+}
+
+.user-view {
+  margin-bottom: 50px;
+}
+
+.paper {
+  background: #fff no-repeat;;
+  padding: 50px;
+  position: relative;
+  background-size: 50px 50px;
+}
+
+
+
+.paper,
+.paper::before,
+.paper::after {
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+  border: 1px solid #bbb;
+}
+
+.paper::before,
+.paper::after {
+  content: "";
+  position: absolute;
+  height: 95%;
+  width: 99%;
+  background-color: #eee;
+}
+
+.paper::before {
+  right: 15px;
+  top: 0;
+  transform: rotate(-1deg);
+  z-index: -1;
+}
+
+.paper::after {
+  top: 5px;
+  right: -5px;
+  transform: rotate(1deg);
+  z-index: -2;
+}
+
+.card-paper:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.login-container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+#task-card {
+  margin: 30px 30px 30px 30px;
+}
+
+#task-card a {
+  color: black;
+}
+
+#task-row {
+  width: 110%;
+  align-items: center;
+  margin-left: 50px;
+}

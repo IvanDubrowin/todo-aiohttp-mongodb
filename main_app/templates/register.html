@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container login-container">
+  <div class="row">
+    <div class="col s3">
+    </div>
+    <div class="col s6 content center">
+      <div class="paper">
+          <img width="200" height="200" src="{{ static('images/todo.png') }}">
+        <form autocomplete="on" method="post">
+            <div class="input-field">
+                <input type="text" class="validate" pattern="[A-Za-zА-Яа-я0-9]{3,}" id="login" required>
+                <label for="login">Введите логин</label>
+            </div>
+            <div class="input-field">
+                <input type="email" class="validate" id="email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-field">
+                <input type="password" class="validate" pattern="[A-Za-zА-Яа-я0-9]{8,}" id="password1" required>
+                <label for="password1">Введите пароль</label>
+            </div>
+            <div class="input-field">
+                <input type="password" class="validate" pattern="[A-Za-zА-Яа-я0-9]{8,}" id="password2" required>
+                <label for="password2">Подтвердите пароль</label>
+            </div>
+            <div id="error" style="color: red;"></div>
+            <p>
+              <input class="btn orange accent-1" id="submit" title="Регистрация" type="button" value="Регистрация">
+            </p>
+            <p class="message">Уже есть аккаунт? <a href="{{ url('login') }}">Войти</a></p>
+        </form>
+      </div>
+    </div>
+    <div class="col s3">
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    function showError(error){
+        $('#error').text(error)
+    }
+
+    $('#submit').click(function(){
+        var login = $('#login').val(),
+            email = $('#email').val(),
+            password = $('#password1'),
+            password2 = $('#password2');
+        if(password.val() === password2.val()){
+            if (login && email && password){
+                $.post('register', {'login': login, 'email': email, 'password': password.val()}, function(data){
+                    if (data.error){
+                        console.log(data.error.error)
+                        showError(data.error.error)
+                    }else{
+                        window.location.href = '/'
+                    }
+                });
+            }else{
+                showError('Пожалуйста заполните все поля')
+            }
+        }else{
+            showError('Пароли должны совпадать');
+        }
+    });
+});
+</script>
+{% endblock %}

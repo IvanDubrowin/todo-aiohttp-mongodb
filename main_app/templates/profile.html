@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% block main %}
+<div class="container login-container">
+  <div class="row">
+    <div class="col s4">
+    </div>
+    <div class="col s4 content center">
+      <div class="paper">
+        <h5>{{ user.login }}</h5>
+        <p>Email: {{ user.email }}</p>
+        {% if tasks %}
+        <p>Количество созданных задач: {{ tasks|length }} </p>
+        <p>Количество активных задач: {{ tasks|selectattr('status', 'equalto', 'active')|list|count }}</p>
+        <p>Количество выполненных задач: {{ tasks|selectattr('status', 'equalto', 'success')|list|count }}</p>
+        <p>Количество невыполненных задач: {{ tasks|selectattr('status', 'equalto', 'not_done')|list|count }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col s4">
+    </div>
+  </div>
+</div>
+{% endblock %}
