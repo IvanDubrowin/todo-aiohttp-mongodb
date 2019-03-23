@@ -83,6 +83,8 @@ class User:
             result = await self.collection.insert_one(
                 {'email': self.email, 'login': self.login, 'password': self.password}
                 )
+            if result:
+                result = result.inserted_id
         else:
             result = {'error': 'Пользователь уже существует'}
         return result
